@@ -3,12 +3,12 @@ Ironhack Project Module 1
 
 ## Descripción
 El pez tiene que evitar chocar con los diferentes objetos de plástico (botellas, latas, etc) e intentar recolectar el máximo número de estrellas (puntos).
-Puede moverse de izquierda a derecha. Si choca con un objeto de plástico, el pez muere y termina la partida.
+Puede moverse de izquierda a derecha en una pantalla vertical. Los objetos y estrellas van desde abajo hacia arriba. Si choca con un objeto de plástico, el pez muere y termina la partida.
 
 ## MVP - Tecnología (DOM - CANVAS)
 Tecnología usada: canvas
 MVP del proyecto:
-* El pez puede moverse de derecha a izquierda
+* El pez puede moverse a la derecha y a la izquierda
 * Aparecen objetos desde abajo hacia arriba
 * Colisiones con los objetos de plástico (game over)
 * States: start, game, game over
@@ -29,13 +29,13 @@ MVP del proyecto:
 * Añadir un dato curioso sobre el plástico randomly en el state de Game Over
 
 ## Estructuras de datos
-Clases:
+__Clases:__
+* Main: main.js
 * Game: game.js
 * Fish: fish.js
-* Plastic: plastic.js
-* Star: star.js
+* Objects: objects.js
 
-Main:
+__Métodos main:__
 * buildSplash()
 * destroySplash()
 * buildGame()
@@ -43,37 +43,37 @@ Main:
 * buildGameOver()
 * destroyGameOver()
 
-Métodos Game:
+__Métodos Game:__
 * _drawBoard()
 * _drawFish()
-* _drawPlastic()
-* _drawStar()
+* _drawObject()
 * start()
 * assignControlToTouchEvents()
 * _generateObject() → Both for plastic and stars
 * _update() → When eaten a star
 * stop()
 
-Métodos Fish:
+__Métodos Fish:__
 * start()
 * move()
 * goLeft()
 * goRight()
 * collidesWith()
 * stop()
-* hasEatenStar() → Para el backlog de añadir animación
 
-Métodos Plastic:
+__Métodos Objects:__
 * move()
-
-Métodos Star:
-* move()
-
-(Creo que podria unir Plastic y Star en una sola clase Objects (?) )
 
 ## Tasks
+1) Crear canvas
+2) Dibujar pez
+3) Hacer que el pez se mueva a la derecha y a la izquierda
+4) Hacer que aparezcan de forma aleatória los objetos de plástico y las estrellas
+5) El pez muere si choca con un objeto de plástico
+6) Se suman puntos si el pez choca con una estrella
 
 ## Trello
+[link](https://trello.com/b/shcaDrEd/ironhack-project-my-game)
 
 ## Git
 
