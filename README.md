@@ -1,8 +1,8 @@
 # PlasticKills game
-Ironhack Project Module 1
+Save the fish from plastic. Ironhack Project Module 1
 
 ## Descripción
-El pez tiene que evitar chocar con los diferentes objetos de plástico (botellas, latas, etc) e intentar recolectar el máximo número de estrellas (puntos).
+El pez tiene que evitar chocar con los diferentes objetos de plástico (botellas, etc) e intentar recolectar el máximo número de estrellas (puntos).
 Puede moverse de izquierda a derecha en una pantalla vertical. Los objetos y estrellas van desde abajo hacia arriba. Si choca con un objeto de plástico, el pez muere y termina la partida.
 
 ## MVP - Tecnología (DOM - CANVAS)
