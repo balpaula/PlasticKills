@@ -26,7 +26,6 @@ MVP del proyecto:
 * Levels: aumentar la velocidad de los objetos + canviar el color del fondo
 * Poder seleccionar diferentes peces en el state Start
 * Animación del pez cuando el pez colisiona con una estrella
-* Añadir un dato curioso sobre el plástico randomly en el state de Game Over
 
 ## Estructuras de datos
 __Clases:__
