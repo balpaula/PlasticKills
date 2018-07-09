@@ -50,12 +50,22 @@ Game.prototype.assignControlToTouchEvents = function () {}
 
 Game.prototype._generateObject = function () {
     this.objects.push(new Object());
+    console.log(this.objects);
+}
+
+Game.prototype._checkObject = function () {
+    this.objects.forEach(function(object, index){
+        if (object.y < 0){
+            this.objects.splice(index,1);
+        }
+    }.bind(this));
 }
 
 Game.prototype._update = function () {
     this._drawBoard();
     this._drawFish();
     this._drawObject();
+    this._checkObject();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
 }
 
