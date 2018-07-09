@@ -2,6 +2,7 @@ function Game (options) {
     this.fish = options.fish;
     this.object = undefined;
     this.ctx = options.ctx;
+    this.objects = [];
 }
 
 Game.prototype._drawBoard = function () {
@@ -17,12 +18,20 @@ Game.prototype._drawFish = function () {
     this.ctx.fillRect(this.fish.x-10, this.fish.y-10, 20, 20);
 }
 
-Game.prototype._drawObject = function () {}
+Game.prototype._drawObject = function () {
+    
+    this.ctx.fillStyle = 'red';
+    this.objects.forEach( function(object) {
+        this.ctx.fillRect(object.x, object.y, 20, 20);
+    }.bind(this));
+}
 
 Game.prototype.start = function () {
+    this._generateObject();
     this.ctx.canvas = document.getElementById('canvas');
     this.ctx.canvas.addEventListener('click', this.on_canvas_click.bind(this), false);
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
+   
 }
 
 Game.prototype.on_canvas_click = function (e) {
@@ -40,11 +49,14 @@ Game.prototype.on_canvas_click = function (e) {
 
 Game.prototype.assignControlToTouchEvents = function () {}
 
-Game.prototype._generateObject = function () {}
+Game.prototype._generateObject = function () {
+    this.objects.push(new Object());
+}
 
 Game.prototype._update = function () {
     this._drawBoard();
     this._drawFish();
+    this._drawObject();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
 }
 
