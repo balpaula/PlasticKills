@@ -1,15 +1,13 @@
 function Game (options) {
     this.fish = options.fish;
     this.ctx = options.ctx;
-    this.objects = [];
+    this.obstacles = [];
 }
 
 Game.prototype._drawBoard = function () {
     this.ctx.fillStyle = '#3b3b3b';
     this.ctx.fillRect(0,0,400,650);
-    if (this.object) {
-        this._drawObject();
-    }
+    
 }
 
 Game.prototype._drawFish = function () {
@@ -17,11 +15,11 @@ Game.prototype._drawFish = function () {
     this.ctx.fillRect(this.fish.x-10, this.fish.y-10, 20, 20);
 }
 
-Game.prototype._drawObject = function () {
+Game.prototype._drawObstacle = function () {
     this.ctx.fillStyle = 'red';
-    this.objects.forEach( function(object) {
-        this.ctx.fillRect(object.x, object.y, 20, 20);
-        object.start();
+    this.obstacles.forEach( function(obstacle) {
+        this.ctx.fillRect(obstacle.x, obstacle.y, 20, 20);
+        obstacle.start();
     }.bind(this));
 }
 
@@ -29,8 +27,8 @@ Game.prototype.start = function () {
     this.ctx.canvas = document.getElementById('canvas');
     this.ctx.canvas.addEventListener('click', this.on_canvas_click.bind(this), false);
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
-    this._generateObject();
-    this.intervalObject = setInterval(this._generateObject.bind(this), 1500);
+    this._generateObstacle();
+    this.intervalObstacle = setInterval(this._generateObstacle.bind(this), 1500);
 }
 
 Game.prototype.on_canvas_click = function (e) {
@@ -48,15 +46,15 @@ Game.prototype.on_canvas_click = function (e) {
 
 Game.prototype.assignControlToTouchEvents = function () {}
 
-Game.prototype._generateObject = function () {
-    this.objects.push(new Object());
-    console.log(this.objects);
+Game.prototype._generateObstacle = function () {
+    this.obstacles.push(new Obstacle());
+    console.log(this.obstacles);
 }
 
-Game.prototype._checkObject = function () {
-    this.objects.forEach(function(object, index){
-        if (object.y < 0){
-            this.objects.splice(index,1);
+Game.prototype._checkObstacle = function () {
+    this.obstacles.forEach(function(obstacle, index){
+        if (obstacle.y < 0){
+            this.obstacles.splice(index,1);
         }
     }.bind(this));
 }
@@ -64,8 +62,8 @@ Game.prototype._checkObject = function () {
 Game.prototype._update = function () {
     this._drawBoard();
     this._drawFish();
-    this._drawObject();
-    this._checkObject();
+    this._drawObstacle();
+    this._checkObstacle();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
 }
 
