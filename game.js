@@ -30,7 +30,7 @@ Game.prototype.start = function () {
     this.ctx.canvas.addEventListener('click', this.on_canvas_click.bind(this), false);
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
     this._generateObject();
-    this.intervalObject = setInterval(this._generateObject.bind(this), 3000);
+    this.intervalObject = setInterval(this._generateObject.bind(this), 1500);
 }
 
 Game.prototype.on_canvas_click = function (e) {
