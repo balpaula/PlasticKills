@@ -14,7 +14,7 @@ Fish.prototype.start = function () {
 Fish.prototype.move = function () {
     console.log('move');
     if (!this.intervalId) {
-        this.intervalId = setInterval(this._moveForward.bind(this), 100);
+        this.intervalId = setInterval(this._moveForward.bind(this), 50);
     }
 }
 
