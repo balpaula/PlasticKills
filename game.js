@@ -1,6 +1,7 @@
 function Game (options) {
     this.fish = options.fish;
     this.ctx = options.ctx;
+    this.background = options.background;
     this.obstacles = [];
     this.gameOver = options.gameOver;
     this.score = 0;
@@ -9,8 +10,13 @@ function Game (options) {
 }
 
 Game.prototype._drawBoard = function () {
-    this.ctx.fillStyle = '#3b3b3b';
-    this.ctx.fillRect(0,0,400,650);   
+//     this.ctx.fillStyle = '#3b3b3b';
+//     this.ctx.fillRect(0,0,400,650);
+}
+
+Game.prototype._drawBackground = function () {
+    this.background.newPosition();
+    this.background.updateBackground();
 }
 
 Game.prototype._drawFish = function () {
@@ -126,8 +132,13 @@ Game.prototype.checkIfEnded = function () {
     }
 }
 
+// Game.prototype.clearCanvas = function () {
+//     this.ctx.clearRect(0,0,400,650);
+// }
+
 Game.prototype._update = function () {
-    this._drawBoard();
+    //this._drawBoard();
+    this._drawBackground();
     this._drawFish();
     this._drawScore();
     this._drawLives();
@@ -135,6 +146,7 @@ Game.prototype._update = function () {
     this._checkObstacle();
     this._collision();
     this.checkIfEnded();
+    
 
     if (!this.isEnded){
         this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
@@ -144,3 +156,4 @@ Game.prototype._update = function () {
     }
     
 }
+

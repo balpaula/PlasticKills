@@ -13,7 +13,7 @@ Fish.prototype.start = function () {
 Fish.prototype.move = function () {
     console.log('move');
     if (!this.intervalId) {
-        this.intervalId = setInterval(this._moveForward.bind(this), 50);
+        this.intervalId = setInterval(this._moveForward.bind(this), 25);
     }
 }
 
@@ -28,7 +28,7 @@ Fish.prototype._moveForward = function () {
 
 Fish.prototype.goLeft = function () {
     if (this.x > 20){
-        this.x-=8;
+        this.x-=5;
     } else {
         this.direction = 'right';
     }
@@ -36,7 +36,7 @@ Fish.prototype.goLeft = function () {
 
 Fish.prototype.goRight = function () {
     if (this.x < 380){
-        this.x+=8;
+        this.x+=5;
     } else {
         this.direction = 'left';
     }

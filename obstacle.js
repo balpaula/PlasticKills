@@ -8,7 +8,7 @@ function Obstacle(){
 
 Obstacle.prototype.start = function () {
     if (!this.intervalId) {
-        this.intervalId = setInterval(this.move.bind(this), 50);
+        this.intervalId = setInterval(this.move.bind(this), 5);
     }
 }
 
@@ -21,7 +21,7 @@ Obstacle.prototype.clear = function () {
 
 Obstacle.prototype.move = function () {
     //console.log('obstacle moving');
-    this.y -= 5;
+    this.y -= 1;
 }
 
 Obstacle.prototype.stop = function () {

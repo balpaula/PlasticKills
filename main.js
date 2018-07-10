@@ -42,13 +42,15 @@ function buildGame(){
     playScreen.appendChild(canvas);
 
     var ctx = canvas.getContext('2d');
-    console.log(ctx);
-    ctx.fillStyle = '#3b3b3b';
-    ctx.fillRect(0,0,400,650);
+
+    //ctx.fillStyle = '#3b3b3b';
+    //ctx.fillRect(0,0,400,650);
 
     game = new Game({
         fish: new Fish(),
+        background: new Background(ctx),
         ctx: ctx,
+        canvas: canvas,
         gameOver: destroyGame,
     });
 
