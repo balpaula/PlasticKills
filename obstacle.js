@@ -3,7 +3,7 @@ function Obstacle(){
     this.y = 630;
     this.intervalId = undefined;
     this.collision = false;
-    this.type = this.chooseType();
+    this.type = this.createType();
 }
 
 Obstacle.prototype.start = function () {
@@ -28,11 +28,11 @@ Obstacle.prototype.stop = function () {
     this.y = 0;
 }
 
-Obstacle.prototype.chooseType = function () {
+Obstacle.prototype.createType = function () {
     var num = Math.floor(Math.random()*5);
     if (num === 4){
-        return 'star';
+        return ['star', 'yellow'];
     } else {
-        return 'enemy';
+        return ['enemy', 'red'];
     }
 }

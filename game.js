@@ -19,8 +19,8 @@ Game.prototype._drawFish = function () {
 }
 
 Game.prototype._drawObstacle = function () {
-    this.ctx.fillStyle = 'red';
     this.obstacles.forEach( function(obstacle) {
+        this.ctx.fillStyle = obstacle.type[1];
         this.ctx.fillRect(obstacle.x, obstacle.y, 20, 20);
         obstacle.start();
     }.bind(this));
@@ -101,7 +101,7 @@ Game.prototype._collision = function () {
 }
 
 Game.prototype.checkCollision = function (obstacle) {
-    if (obstacle.type === 'enemy'){
+    if (obstacle.type[0] === 'enemy'){
         this.removeLive();
     } else {
         this.score += 10;
