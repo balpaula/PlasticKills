@@ -2,12 +2,15 @@ function Game (options) {
     this.fish = options.fish;
     this.ctx = options.ctx;
     this.obstacles = [];
+    this.gameOver = options.gameOver;
+    this.score = 0;
+    this.lives = 3;
+    this.isEnded = false;
 }
 
 Game.prototype._drawBoard = function () {
     this.ctx.fillStyle = '#3b3b3b';
-    this.ctx.fillRect(0,0,400,650);
-    
+    this.ctx.fillRect(0,0,400,650);   
 }
 
 Game.prototype._drawFish = function () {
@@ -41,13 +44,20 @@ Game.prototype.onCanvasClick = function (e) {
         this.fish.direction = 'right';
     }
 
-    this.fish.start();
+    if (!this.isEnded){
+        this.fish.start();
+    }
 }
 
 Game.prototype._generateObstacle = function () {
     this.obstacles.push(new Obstacle());
-    console.log(this.obstacles);
 }
+
+// Game.prototype._removeObstacles = function () {
+//     this.obstacles.forEach(function(obstacle, index) {
+//         obstacle.stop();
+//     }.bind(this));
+// }
 
 Game.prototype._checkObstacle = function () {
     this.obstacles.forEach(function(obstacle, index){
@@ -69,12 +79,39 @@ Game.prototype._collision = function () {
         corners.forEach(function(corner){
             if (corner[0]  >=this.fish.x && corner[0] <= this.fish.x+20 && corner[1] >= this.fish.y && corner[1] <= this.fish.y+20){
                 if (obstacle.collision === false){
-                    console.log('collision');
                     obstacle.collision = true;
+                    console.log(obstacle.type);
+                    this.checkCollision(obstacle);
                 } 
             }
         }.bind(this));
     }.bind(this))
+}
+
+Game.prototype.checkCollision = function (obstacle) {
+    if (obstacle.type === 'enemy'){
+        this.removeLive();
+    } else {
+        this.score += 10;
+    }
+}
+
+Game.prototype.removeLive = function () {
+    this.lives -= 1;
+}
+
+// Game.prototype.end = function () {
+//     clearInterval(this.intervalObstacle);
+//     this.fish.stop();
+//     this._removeObstacles();
+//     //this.stop();
+//     this.gameOver();
+// }
+
+Game.prototype.checkIfEnded = function () {
+    if (this.lives === 0){
+        this.isEnded = true;
+    }
 }
 
 Game.prototype._update = function () {
@@ -83,7 +120,13 @@ Game.prototype._update = function () {
     this._drawObstacle();
     this._checkObstacle();
     this._collision();
-    this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
-}
+    this.checkIfEnded();
 
-Game.prototype.stop = function () {}
+    if (!this.isEnded){
+        this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
+    } else {
+        this.fish.stop();
+        setTimeout(this.gameOver, 750);
+    }
+    
+}

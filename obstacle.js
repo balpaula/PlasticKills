@@ -3,6 +3,7 @@ function Obstacle(){
     this.y = 630;
     this.intervalId = undefined;
     this.collision = false;
+    this.type = this.chooseType();
 }
 
 Obstacle.prototype.start = function () {
@@ -14,10 +15,24 @@ Obstacle.prototype.start = function () {
 Obstacle.prototype.clear = function () {
     if (this.intervalId) {
         clearInterval(this.intervalId);
+        this.intervalId = undefined;
     }
 }
 
 Obstacle.prototype.move = function () {
+    //console.log('obstacle moving');
     this.y -= 5;
 }
 
+Obstacle.prototype.stop = function () {
+    this.y = 0;
+}
+
+Obstacle.prototype.chooseType = function () {
+    var num = Math.floor(Math.random()*5);
+    if (num === 4){
+        return 'star';
+    } else {
+        return 'enemy';
+    }
+}

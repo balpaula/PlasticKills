@@ -43,6 +43,9 @@ Fish.prototype.goRight = function () {
     }
 }
 
-Fish.prototype.collidesWith = function () {}
-
-Fish.prototype.stop = function () {}
+Fish.prototype.stop = function () {
+    if ( this.intervalId ) {
+        clearInterval(this.intervalId)
+        this.intervalId = undefined;
+    }
+}

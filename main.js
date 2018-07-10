@@ -49,14 +49,11 @@ function buildGame(){
     game = new Game({
         fish: new Fish(),
         ctx: ctx,
+        gameOver: destroyGame,
     });
 
     game.start();
     
-    // setTimeout(function(){
-    //     destroyGame();
-    //     buildGameOver();
-    // },3000);
 }
 
 function destroyGame(){
@@ -65,6 +62,7 @@ function destroyGame(){
     while (playScreen.firstChild) {
         playScreen.removeChild(playScreen.firstChild);
     }
+    buildGameOver();
 }
 
 function buildGameOver(){
