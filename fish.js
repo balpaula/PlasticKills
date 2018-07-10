@@ -1,9 +1,8 @@
 function Fish () {
     this.x = 200;
     this.y = 200;
-    this.direction = 'left';
+    this.direction = undefined;
     this.intervalId = undefined;
-
 }
 
 Fish.prototype.start = function () {

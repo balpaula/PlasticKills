@@ -26,6 +26,18 @@ Game.prototype._drawObstacle = function () {
     }.bind(this));
 }
 
+Game.prototype._drawScore = function () {
+    this.ctx.fillStyle='white';
+    this.ctx.font ='14px sans-serif';
+    this.ctx.fillText('Score: '+this.score,300,30);
+}
+   
+Game.prototype._drawLives = function () {
+    this.ctx.fillStyle = 'white';
+    this.ctx.font = '14px sans-serif';
+    this.ctx.fillText('Lives: '+this.lives,300,50);
+}
+
 Game.prototype.start = function () {
     this.ctx.canvas = document.getElementById('canvas');
     this.ctx.canvas.addEventListener('click', this.onCanvasClick.bind(this), false);
@@ -117,6 +129,8 @@ Game.prototype.checkIfEnded = function () {
 Game.prototype._update = function () {
     this._drawBoard();
     this._drawFish();
+    this._drawScore();
+    this._drawLives();
     this._drawObstacle();
     this._checkObstacle();
     this._collision();
