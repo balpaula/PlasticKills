@@ -5,6 +5,7 @@ function Obstacle(){
     this.collision = false;
     this.image = new Image();
     this.type = undefined;
+    this.speed = 0;
     this.image.src = undefined;
     this.image.width = undefined;
     this.image.height = undefined;
@@ -24,8 +25,7 @@ Obstacle.prototype.clear = function () {
 }
 
 Obstacle.prototype.move = function () {
-    //console.log('obstacle moving');
-    this.y -= 2;
+    this.y -= (2+this.speed);
 }
 
 Obstacle.prototype.stop = function () {
@@ -77,3 +77,13 @@ Star.prototype.randomStarColor = function () {
     var imagesArray = ['Media/star.png'];
     return imagesArray[Math.floor(Math.random()*imagesArray.length)];
 }
+
+function Heart () {
+    Obstacle.call(this);
+    this.type = 'heart';
+    this.image.src = 'Media/heart.png';
+    this.width = 25;
+    this.height = 25;
+}
+
+Heart.prototype = Object.create(Obstacle.prototype);

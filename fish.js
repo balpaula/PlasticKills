@@ -8,19 +8,16 @@ function Fish () {
 }
 
 Fish.prototype.start = function () {
-    console.log('fish start');
     this.move();
 }
 
 Fish.prototype.move = function () {
-    console.log('move');
     if (!this.intervalId) {
         this.intervalId = setInterval(this._moveForward.bind(this), 25);
     }
 }
 
 Fish.prototype._moveForward = function () {
-    console.log('move forward');
     if (this.direction === 'right'){
         this.goRight();
     } else {

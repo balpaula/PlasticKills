@@ -7,7 +7,7 @@ function Game (options) {
     this.score = 0;
     this.autoScore = 0;
     this.level = 1;
-    this.extra = {x: undefined, y: undefined};
+    this.extra = {x: undefined, y: undefined, text: undefined};
     this.lives = 3;
     this.livesImage = new Image();
     this.livesImage.src = 'Media/heart.png';
@@ -28,15 +28,16 @@ Game.prototype._drawObstacle = function () {
     this.obstacles.forEach( function(obstacle) {
         if (obstacle.type === 'plasticItem'){
             this.ctx.drawImage(obstacle.image, obstacle.x, obstacle.y, 32, 70);
-        } else {
+        } else if (obstacle.type === 'star'){
             this.ctx.drawImage(obstacle.image, obstacle.x, obstacle.y, 30, 30);
+        } else {
+            this.ctx.drawImage(obstacle.image, obstacle.x, obstacle.y, 25, 21);
         }
         obstacle.start();
     }.bind(this));
 }
 
 Game.prototype._drawLevel = function () {
-    this.level = 1 + Math.floor(this.score/100);
     this.ctx.fillStyle = 'white';
     this.ctx.font = '31px Gaegu';
     this.ctx.fillText('Level '+this.level, 16, 32);
@@ -53,11 +54,14 @@ Game.prototype._drawExtra = function (x, y) {
     if (this.extra.y){
         this.ctx.fillStyle = 'white';
         this.ctx.font = '700 22px Gaegu';
-        this.ctx.fillText('+10', this.extra.x, this.extra.y+10);
+        this.ctx.fillText(this.extra.text, this.extra.x, this.extra.y+10);
     }
 }
    
 Game.prototype._drawLives = function () {
+    if (this.lives > 3){
+        this.lives = 3;
+    }
     for (var i = 0; i < this.lives; i++){
         this.ctx.drawImage(this.livesImage, 300+30*i, 42, 25, 21);
     }
@@ -66,7 +70,7 @@ Game.prototype._drawLives = function () {
 Game.prototype._drawMessage = function () {
     this.ctx.fillStyle = 'white';
     this.ctx.font = '50px Gaegu';
-    this.ctx.fillText('PLASTIC KILLS',50,320);
+    this.ctx.fillText('PLASTIC KILLS',50,330);
 }
 
 Game.prototype.start = function () {
@@ -94,9 +98,15 @@ Game.prototype.onCanvasClick = function (e) {
 
 Game.prototype._generateObstacle = function () {
     var item;
-    var num = Math.floor(Math.random()*5);
-    if (num === 4){
+    var options = 5
+    if (this.lives < 3){
+        options = 8;
+    }
+    var num = Math.floor(Math.random()*options);
+    if (num === 4 || num === 5){
         item = new Star();
+    } else if (num === 6){
+        item = new Heart();
     } else {
         item = new PlasticItem();
     }
@@ -136,10 +146,16 @@ Game.prototype.checkCollision = function (obstacle, index) {
     if (obstacle.type === 'plasticItem'){
         this.removeLive();
     } else {
-        this.score += 10;
         this.extra.x = obstacle.x;
         this.extra.y = obstacle.y+10;
         setTimeout(this._removeExtra.bind(this), 300);
+        if (obstacle.type === 'star') {
+            this.score += 10;
+            this.extra.text = '+10';
+        } else {
+            this.lives++;
+            this.extra.text = 'LIVE UP';
+        }
     }
     obstacle.clear();
     this.obstacles.splice(index,1);
@@ -162,6 +178,13 @@ Game.prototype._increaseScore = function () {
     }
 }
 
+Game.prototype._checkLevel = function () {
+    this.level = 1 + Math.floor(this.score/100);
+    this.obstacles.forEach(function(obstacle){
+        obstacle.speed = ((this.level-1)/10)*5;
+    }.bind(this));
+}
+
 Game.prototype.checkIfEnded = function () {
     if (this.lives === 0){
         setTimeout(function(){
@@ -181,6 +204,7 @@ Game.prototype._update = function () {
     this._checkObstacle();
     this._collision();
     this._increaseScore();
+    this._checkLevel();
     this.checkIfEnded();
     
 
