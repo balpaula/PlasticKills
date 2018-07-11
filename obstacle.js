@@ -3,12 +3,7 @@ function Obstacle(){
     this.y = 630;
     this.intervalId = undefined;
     this.collision = false;
-    // this.type = this.createType();
     this.image = new Image();
-    // this.image.src = this.type[2];
-    // this.image.width = 32;
-    // this.image.height = 70;
-    // Refactor:
     this.type = undefined;
     this.image.src = undefined;
     this.image.width = undefined;

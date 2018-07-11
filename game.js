@@ -5,15 +5,14 @@ function Game (options) {
     this.obstacles = [];
     this.gameOver = options.gameOver;
     this.score = 0;
+    this.autoScore = 0;
+    this.level = 1;
+    this.extra = {x: undefined, y: undefined};
     this.lives = 3;
     this.livesImage = new Image();
     this.livesImage.src = 'Media/heart.png';
     this.isEnded = false;
-}
-
-Game.prototype._drawBoard = function () {
-//     this.ctx.fillStyle = '#3b3b3b';
-//     this.ctx.fillRect(0,0,400,650);
+    this.speedObstacles = 750;
 }
 
 Game.prototype._drawBackground = function () {
@@ -22,15 +21,11 @@ Game.prototype._drawBackground = function () {
 }
 
 Game.prototype._drawFish = function () {
-    // this.ctx.fillStyle = 'green';
-    // this.ctx.fillRect(this.fish.x-10, this.fish.y-10, 20, 20);
     this.ctx.drawImage(this.fish.image, this.fish.x-46, this.fish.y-54, 93, 109);
 }
 
 Game.prototype._drawObstacle = function () {
     this.obstacles.forEach( function(obstacle) {
-        // this.ctx.fillStyle = obstacle.type[1];
-        // this.ctx.fillRect(obstacle.x, obstacle.y, 20, 20);
         if (obstacle.type === 'plasticItem'){
             this.ctx.drawImage(obstacle.image, obstacle.x, obstacle.y, 32, 70);
         } else {
@@ -40,19 +35,38 @@ Game.prototype._drawObstacle = function () {
     }.bind(this));
 }
 
+Game.prototype._drawLevel = function () {
+    this.level = 1 + Math.floor(this.score/100);
+    this.ctx.fillStyle = 'white';
+    this.ctx.font = '31px Gaegu';
+    this.ctx.fillText('Level '+this.level, 16, 32);
+}
+
 Game.prototype._drawScore = function () {
-    this.ctx.fillStyle='white';
-    this.ctx.font ='14px sans-serif';
-    this.ctx.fillText('Score: '+this.score,300,30);
+    this.ctx.fillStyle ='white';
+    this.ctx.font ='31px Gaegu';
+    var textScore = ('0000'+this.score).slice(-5);
+    this.ctx.fillText(textScore,300,32);
+}
+
+Game.prototype._drawExtra = function (x, y) {
+    if (this.extra.y){
+        this.ctx.fillStyle = 'white';
+        this.ctx.font = '700 22px Gaegu';
+        this.ctx.fillText('+10', this.extra.x, this.extra.y+10);
+    }
 }
    
 Game.prototype._drawLives = function () {
-    // this.ctx.fillStyle = 'white';
-    // this.ctx.font = '14px sans-serif';
-    // this.ctx.fillText('Lives: '+this.lives,300,50);
     for (var i = 0; i < this.lives; i++){
-        this.ctx.drawImage(this.livesImage, 300+30*i, 50, 25, 21);
+        this.ctx.drawImage(this.livesImage, 300+30*i, 42, 25, 21);
     }
+}
+
+Game.prototype._drawMessage = function () {
+    this.ctx.fillStyle = 'white';
+    this.ctx.font = '50px Gaegu';
+    this.ctx.fillText('PLASTIC KILLS',50,320);
 }
 
 Game.prototype.start = function () {
@@ -60,7 +74,7 @@ Game.prototype.start = function () {
     this.ctx.canvas.addEventListener('click', this.onCanvasClick.bind(this), false);
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
     this._generateObstacle();
-    this.intervalObstacle = setInterval(this._generateObstacle.bind(this), 1000);
+    this.intervalObstacle = setInterval(this._generateObstacle.bind(this), this.speedObstacles);
 }
 
 Game.prototype.onCanvasClick = function (e) {
@@ -88,12 +102,6 @@ Game.prototype._generateObstacle = function () {
     }
     this.obstacles.push(item);
 }
-
-// Game.prototype._removeObstacles = function () {
-//     this.obstacles.forEach(function(obstacle, index) {
-//         obstacle.stop();
-//     }.bind(this));
-// }
 
 Game.prototype._checkObstacle = function () {
     this.obstacles.forEach(function(obstacle, index){
@@ -129,22 +137,30 @@ Game.prototype.checkCollision = function (obstacle, index) {
         this.removeLive();
     } else {
         this.score += 10;
+        this.extra.x = obstacle.x;
+        this.extra.y = obstacle.y+10;
+        setTimeout(this._removeExtra.bind(this), 300);
     }
     obstacle.clear();
     this.obstacles.splice(index,1);
+}
+
+Game.prototype._removeExtra = function () {
+    this.extra.x = undefined;
+    this.extra.y = undefined;
 }
 
 Game.prototype.removeLive = function () {
     this.lives -= 1;
 }
 
-// Game.prototype.end = function () {
-//     clearInterval(this.intervalObstacle);
-//     this.fish.stop();
-//     this._removeObstacles();
-//     //this.stop();
-//     this.gameOver();
-// }
+Game.prototype._increaseScore = function () {
+    this.autoScore++;
+    if (this.autoScore === 10){
+        this.score++;
+        this.autoScore = 0;
+    }
+}
 
 Game.prototype.checkIfEnded = function () {
     if (this.lives === 0){
@@ -155,14 +171,16 @@ Game.prototype.checkIfEnded = function () {
 }
 
 Game.prototype._update = function () {
-    //this._drawBoard();
     this._drawBackground();
     this._drawFish();
     this._drawObstacle();
     this._drawScore();
+    this._drawExtra();
+    this._drawLevel();
     this._drawLives();
     this._checkObstacle();
     this._collision();
+    this._increaseScore();
     this.checkIfEnded();
     
 
@@ -170,7 +188,8 @@ Game.prototype._update = function () {
         this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
     } else {
         this.fish.stop();
-        setTimeout(this.gameOver, 750);
+        this._drawMessage();
+        setTimeout(this.gameOver, 1000);
     }
     
 }

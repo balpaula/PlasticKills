@@ -11,11 +11,13 @@ function buildSplash(){
     startScreen.style.width = '400px';
     startScreen.style.height = '650px';
 
-
     var title = document.createElement('h1');
+    title.className = 'main-title';
+    title.style.fontSize = '80px';
     title.innerHTML = 'Plastic Kills';
 
     var startButton = document.createElement('button');
+    startButton.className = 'button-start';
     startButton.innerHTML = 'Start';
 
     startScreen.appendChild(title);
@@ -83,13 +85,18 @@ function destroyGame(){
 function buildGameOver(){
     console.log('build game over');
     var finishScreen = document.getElementById('finish-screen');
+    finishScreen.style.background = "url('Media/Background.png')";
+    finishScreen.style.backgroundRepeat = 'no-repeat';
     finishScreen.style.width = '400px';
     finishScreen.style.height = '650px';
 
     var title = document.createElement('h1');
+    title.className = 'main-title';
+    title.style.fontSize = '60px';
     title.innerHTML = 'Game over';
 
     var restartButton = document.createElement('button');
+    restartButton.className = 'button-restart';
     restartButton.innerHTML = 'Try again';
 
     finishScreen.appendChild(title);

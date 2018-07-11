@@ -19,3 +19,29 @@ body {
     background-position: center;
     margin-top: -15px;
 }
+
+.main-title {
+    margin-top: 45%;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 900;
+    color: white;
+    line-height: 90px;
+}
+
+.button-start, .button-restart {
+    font-family: 'Gaegu', sans-serif;
+    align-self:center;
+    background:transparent;
+    padding:6px 32px;
+    transition:all .5s ease;
+    color: white;
+    font-size: 35px;
+    letter-spacing:1px;
+    box-shadow: 20px 38px 34px -26px hsla(0,0%,0%,.2);
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    border: solid 2px white;
+}
+
+.button-start:hover, .button-restart:hover{
+    box-shadow:2px 8px 4px -6px hsla(0,0%,0%,.3);
+ } 
