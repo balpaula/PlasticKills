@@ -4,7 +4,7 @@ function Fish () {
     this.direction = undefined;
     this.intervalId = undefined;
     this.image = new Image();
-    this.image.src = '../Media/Fish.png';
+    this.image.src = 'Media/Fish.png';
 }
 
 Fish.prototype.start = function () {
@@ -30,7 +30,7 @@ Fish.prototype._moveForward = function () {
 
 Fish.prototype.goLeft = function () {
     this.direction = 'left';
-    this.image.src = '../Media/Fish-Left.png';
+    this.image.src = 'Media/Fish-Left.png';
     if (this.x > 20){
         this.x-=5;
     } else {
@@ -40,7 +40,7 @@ Fish.prototype.goLeft = function () {
 
 Fish.prototype.goRight = function () {
     this.direction = 'right';
-    this.image.src = '../Media/Fish-Right.png';
+    this.image.src = 'Media/Fish-Right.png';
     if (this.x < 380){
         this.x+=5;
     } else {

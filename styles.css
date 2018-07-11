@@ -13,7 +13,7 @@ body {
 }
 
 #start-screen {
-    background-image: url('../Media/animation-vertical.gif');
+    background-image: url('Media/animation-vertical.gif');
     background-repeat: no-repeat;
     background-size: 400px 650px;
     background-position: center;

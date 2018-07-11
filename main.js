@@ -5,7 +5,7 @@ window.onload = function (){
 function buildSplash(){
     console.log('build splash');
     var startScreen = document.getElementById('start-screen');
-    startScreen.style.background = "url('../Media/animation-vertical.gif')";
+    startScreen.style.background = "url('Media/animation-vertical.gif')";
     startScreen.style.backgroundRepeat = 'no-repeat';
     startScreen.style.backgroundSize = '400px 650px';
     startScreen.style.width = '400px';

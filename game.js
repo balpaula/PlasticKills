@@ -29,7 +29,11 @@ Game.prototype._drawObstacle = function () {
     this.obstacles.forEach( function(obstacle) {
         // this.ctx.fillStyle = obstacle.type[1];
         // this.ctx.fillRect(obstacle.x, obstacle.y, 20, 20);
-        this.ctx.drawImage(obstacle.image, obstacle.x, obstacle.y, 32, 70);
+        if (obstacle.type === 'plasticItem'){
+            this.ctx.drawImage(obstacle.image, obstacle.x, obstacle.y, 32, 70);
+        } else {
+            this.ctx.drawImage(obstacle.image, obstacle.x, obstacle.y, 30, 30);
+        }
         obstacle.start();
     }.bind(this));
 }
@@ -51,7 +55,7 @@ Game.prototype.start = function () {
     this.ctx.canvas.addEventListener('click', this.onCanvasClick.bind(this), false);
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
     this._generateObstacle();
-    this.intervalObstacle = setInterval(this._generateObstacle.bind(this), 1500);
+    this.intervalObstacle = setInterval(this._generateObstacle.bind(this), 1000);
 }
 
 Game.prototype.onCanvasClick = function (e) {
@@ -70,7 +74,14 @@ Game.prototype.onCanvasClick = function (e) {
 }
 
 Game.prototype._generateObstacle = function () {
-    this.obstacles.push(new Obstacle());
+    var item;
+    var num = Math.floor(Math.random()*5);
+    if (num === 4){
+        item = new Star();
+    } else {
+        item = new PlasticItem();
+    }
+    this.obstacles.push(item);
 }
 
 // Game.prototype._removeObstacles = function () {
@@ -109,7 +120,7 @@ Game.prototype._collision = function () {
 }
 
 Game.prototype.checkCollision = function (obstacle, index) {
-    if (obstacle.type[0] === 'enemy'){
+    if (obstacle.type === 'plasticItem'){
         this.removeLive();
     } else {
         this.score += 10;
