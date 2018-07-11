@@ -1,8 +1,8 @@
 function Background(ctx){
     this.image = new Image();
-    this.image.src = '../Media/Background.png';
+    this.image.src = '../Media/Background-dark2.png';
     this.width = 400;
-    this.height = 650;
+    this.height = 900;
     this.speedY = -2;
     this.x = 0;
     this.y = 0;

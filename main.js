@@ -5,6 +5,12 @@ window.onload = function (){
 function buildSplash(){
     console.log('build splash');
     var startScreen = document.getElementById('start-screen');
+    startScreen.style.background = "url('../Media/animation-vertical.gif')";
+    startScreen.style.backgroundRepeat = 'no-repeat';
+    startScreen.style.backgroundSize = '400px 650px';
+    startScreen.style.width = '400px';
+    startScreen.style.height = '650px';
+
 
     var title = document.createElement('h1');
     title.innerHTML = 'Plastic Kills';
@@ -27,11 +33,16 @@ function destroySplash(){
     while (startScreen.firstChild) {
         startScreen.removeChild(startScreen.firstChild);
     }
+    startScreen.style.background = 'none';
+    startScreen.style.width = '0px';
+    startScreen.style.height = '0px';
 }
 
 function buildGame(){
     console.log('build game');
     var playScreen = document.getElementById('play-screen');
+    playScreen.style.width = '400px';
+    playScreen.style.height = '650px';
 
     var canvas = document.createElement('canvas');
     canvas.id = 'my-canvas';
@@ -64,12 +75,16 @@ function destroyGame(){
     while (playScreen.firstChild) {
         playScreen.removeChild(playScreen.firstChild);
     }
+    playScreen.style.width = '0px';
+    playScreen.style.height = '0px';
     buildGameOver();
 }
 
 function buildGameOver(){
     console.log('build game over');
     var finishScreen = document.getElementById('finish-screen');
+    finishScreen.style.width = '400px';
+    finishScreen.style.height = '650px';
 
     var title = document.createElement('h1');
     title.innerHTML = 'Game over';
@@ -92,4 +107,6 @@ function destroyGameOver(){
     while (finishScreen.firstChild) {
         finishScreen.removeChild(finishScreen.firstChild);
     }
+    finishScreen.style.width = '0px';
+    finishScreen.style.height = '0px';
 }

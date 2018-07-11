@@ -4,11 +4,15 @@ function Obstacle(){
     this.intervalId = undefined;
     this.collision = false;
     this.type = this.createType();
+    this.image = new Image();
+    this.image.src = this.type[2];
+    this.image.width = 32;
+    this.image.height = 70;
 }
 
 Obstacle.prototype.start = function () {
     if (!this.intervalId) {
-        this.intervalId = setInterval(this.move.bind(this), 5);
+        this.intervalId = setInterval(this.move.bind(this), 10);
     }
 }
 
@@ -21,7 +25,7 @@ Obstacle.prototype.clear = function () {
 
 Obstacle.prototype.move = function () {
     //console.log('obstacle moving');
-    this.y -= 1;
+    this.y -= 2;
 }
 
 Obstacle.prototype.stop = function () {
@@ -31,8 +35,13 @@ Obstacle.prototype.stop = function () {
 Obstacle.prototype.createType = function () {
     var num = Math.floor(Math.random()*5);
     if (num === 4){
-        return ['star', 'yellow'];
+        return ['star', 'yellow', '../Media/groga.png'];
     } else {
-        return ['enemy', 'red'];
+        return ['enemy', 'red', this.randomPlasticItem()];
     }
+}
+
+Obstacle.prototype.randomPlasticItem = function () {
+    var imagesArray = ['../Media/bottle.png','../Media/bag.png', '../Media/spoon.png'];
+    return imagesArray[Math.floor(Math.random()*imagesArray.length)];
 }
