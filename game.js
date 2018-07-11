@@ -6,6 +6,8 @@ function Game (options) {
     this.gameOver = options.gameOver;
     this.score = 0;
     this.lives = 3;
+    this.livesImage = new Image();
+    this.livesImage.src = 'Media/heart.png';
     this.isEnded = false;
 }
 
@@ -45,9 +47,12 @@ Game.prototype._drawScore = function () {
 }
    
 Game.prototype._drawLives = function () {
-    this.ctx.fillStyle = 'white';
-    this.ctx.font = '14px sans-serif';
-    this.ctx.fillText('Lives: '+this.lives,300,50);
+    // this.ctx.fillStyle = 'white';
+    // this.ctx.font = '14px sans-serif';
+    // this.ctx.fillText('Lives: '+this.lives,300,50);
+    for (var i = 0; i < this.lives; i++){
+        this.ctx.drawImage(this.livesImage, 300+30*i, 50, 25, 21);
+    }
 }
 
 Game.prototype.start = function () {
@@ -143,13 +148,11 @@ Game.prototype.removeLive = function () {
 
 Game.prototype.checkIfEnded = function () {
     if (this.lives === 0){
-        this.isEnded = true;
+        setTimeout(function(){
+            this.isEnded = true;
+        }.bind(this), 100);
     }
 }
-
-// Game.prototype.clearCanvas = function () {
-//     this.ctx.clearRect(0,0,400,650);
-// }
 
 Game.prototype._update = function () {
     //this._drawBoard();

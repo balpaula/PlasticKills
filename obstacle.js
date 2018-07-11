@@ -79,6 +79,6 @@ function Star (){
 Star.prototype = Object.create(Obstacle.prototype);
 
 Star.prototype.randomStarColor = function () {
-    var imagesArray = ['Media/star-little.png'];
+    var imagesArray = ['Media/star.png'];
     return imagesArray[Math.floor(Math.random()*imagesArray.length)];
 }
