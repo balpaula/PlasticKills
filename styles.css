@@ -1,15 +1,14 @@
 body {
     font-family: 'sans-serif';
-
 }
 
 .center {
     text-align: center;
-    margin: 0 auto;
 }
 
 #start-screen, #play-screen, #finish-screen {
-    display: inline-block
+    display: inline-block;
+    
 }
 
 #start-screen {
@@ -17,15 +16,54 @@ body {
     background-repeat: no-repeat;
     background-size: 400px 650px;
     background-position: center;
-    margin-top: -15px;
+}
+
+#finish-screen {
+    position: relative;
+}
+
+#finish-elements{
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    width: 400px;
+    height: 650px;
+}
+
+.main-title, .game-over-title {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 800;
+    color: white;
+    line-height: 90px;
 }
 
 .main-title {
     margin-top: 45%;
+}
+
+.game-over-title {
+    margin-top: 35%;
+}
+
+.score-text {
     font-family: 'Open Sans', sans-serif;
-    font-weight: 900;
+    font-weight: 800;
+    font-size: 40px;
     color: white;
-    line-height: 90px;
+}
+
+.fact-container {
+    
+}
+
+.fact-text {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    color: white;
+    padding: 5%;
+    margin: 2em 2em;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
 }
 
 .button-start, .button-restart {
@@ -45,4 +83,8 @@ body {
 .button-start:hover, .button-restart:hover{
     box-shadow:2px 8px 4px -6px hsla(0,0%,0%,.3);
     cursor: pointer;
- } 
+}
+
+h2, h3 {
+    margin: 0;
+}

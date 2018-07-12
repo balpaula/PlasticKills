@@ -5,6 +5,8 @@ function Fish () {
     this.intervalId = undefined;
     this.image = new Image();
     this.image.src = 'Media/Fish.png';
+    this.width = 93;
+    this.height = 109;
 }
 
 Fish.prototype.start = function () {

@@ -180,6 +180,7 @@ Game.prototype._increaseScore = function () {
 
 Game.prototype._checkLevel = function () {
     this.level = 1 + Math.floor(this.score/100);
+    this.speedObstacles = 750 - 50*(this.level-1);
     this.obstacles.forEach(function(obstacle){
         obstacle.speed = ((this.level-1)/10)*5;
     }.bind(this));
@@ -211,10 +212,14 @@ Game.prototype._update = function () {
     if (!this.isEnded){
         this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
     } else {
+        localStorage.setItem('score',this.score);
         this.fish.stop();
         this._drawMessage();
         setTimeout(this.gameOver, 1000);
     }
     
 }
+
+//localStorage.getItem
+//localStorage.setItem
 

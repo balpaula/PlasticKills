@@ -90,17 +90,58 @@ function buildGameOver(){
     finishScreen.style.width = '400px';
     finishScreen.style.height = '650px';
 
+    var canvas = document.createElement('canvas');
+    canvas.id = 'canvas-game-over';
+    canvas.width = 400;
+    canvas.height = 650;
+
+    finishScreen.appendChild(canvas);
+    var ctx = canvas.getContext('2d');
+
+    var background = new Background(ctx);
+
+    drawBackground();
+
+    function drawBackground() {
+        background.newPosition();
+        background.updateBackground();
+        window.requestAnimationFrame(drawBackground.bind(this))
+    }
+
+    var finishElements = document.createElement('div');
+    finishElements.id = 'finish-elements';
+
+    finishScreen.appendChild(finishElements);
+
     var title = document.createElement('h1');
-    title.className = 'main-title';
-    title.style.fontSize = '60px';
+    title.className = 'game-over-title';
+    title.style.fontSize = '50px';
     title.innerHTML = 'Game over';
+
+    var textScore = document.createElement('h3');
+    textScore.style.fontFamily = 'Gaegu';
+    textScore.style.fontSize = '22px';
+    textScore.style.color = 'white';
+    textScore.innerHTML = 'Your score is';
+
+    var score = document.createElement('h2');
+    score.className = 'score-text';
+    score.innerHTML = localStorage.getItem('score');
 
     var restartButton = document.createElement('button');
     restartButton.className = 'button-restart';
     restartButton.innerHTML = 'Try again';
 
-    finishScreen.appendChild(title);
-    finishScreen.appendChild(restartButton);
+    var fact = new Fact();
+    var factText = document.createElement('h4');
+    factText.className = 'fact-text';
+    factText.innerHTML = fact.text;
+
+    finishElements.appendChild(title);
+    finishElements.appendChild(textScore);
+    finishElements.appendChild(score);
+    finishElements.appendChild(factText);
+    finishElements.appendChild(restartButton);
 
     restartButton.addEventListener('click', function(){
         destroyGameOver();
