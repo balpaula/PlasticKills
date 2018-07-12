@@ -70,7 +70,7 @@ Game.prototype._drawLives = function () {
 Game.prototype._drawMessage = function () {
     this.ctx.fillStyle = 'white';
     this.ctx.font = '50px Gaegu';
-    this.ctx.fillText('PLASTIC KILLS',50,330);
+    this.ctx.fillText('GAME OVER',78,330);
 }
 
 Game.prototype.start = function () {

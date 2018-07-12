@@ -20,12 +20,29 @@ function buildSplash(){
     startButton.className = 'button-start';
     startButton.innerHTML = 'Start';
 
+    var infoButton = document.createElement('div');
+    infoButton.className = 'info-icon';
+
+    var instructions = document.createElement('p');
+    instructions.className = 'instructions';
+    instructions.innerHTML = '';
+
     startScreen.appendChild(title);
     startScreen.appendChild(startButton);
+    startScreen.appendChild(infoButton);
+    startScreen.appendChild(instructions);
 
     startButton.addEventListener('click', function(){
         destroySplash();
         buildGame();
+    });
+
+    infoButton.addEventListener('click', function(){
+        if (instructions.innerHTML === ''){
+            instructions.innerHTML = 'Touch left or right side of the screen to change the direction. Avoid plastic and collect stars.';
+        } else {
+            instructions.innerHTML = '';
+        }
     });
 }
 
