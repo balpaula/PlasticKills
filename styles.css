@@ -26,7 +26,6 @@ body {
     bottom: 0;
     left: 0;
     position: absolute;
-    width: 400px;
     height: 650px;
 }
 
@@ -42,7 +41,8 @@ body {
 }
 
 .game-over-title {
-    margin-top: 35%;
+    margin-top: 25%;
+    margin-bottom: 10px;
 }
 
 .score-text {
@@ -53,17 +53,32 @@ body {
 }
 
 .fact-container {
-    
+    height: 100px;
+    margin: 1em 2em 2em;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
 }
 
 .fact-text {
     font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
     font-weight: 300;
     color: white;
-    padding: 5%;
-    margin: 2em 2em;
-    background-color: rgba(255, 255, 255, 0.15);
-    border-radius: 20px;
+    padding: 5% 5% 3%;
+    position: relative;
+    top: 40%;
+    transform: translateY(-50%);
+    margin: 0;
+}
+
+.source-text {
+    font-size: 9px;
+    font-style: italic;
+    color: white;
 }
 
 .button-start, .button-restart {

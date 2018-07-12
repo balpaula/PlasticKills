@@ -132,20 +132,29 @@ function buildGameOver(){
     restartButton.className = 'button-restart';
     restartButton.innerHTML = 'Try again';
 
+    var factContainer = document.createElement('div');
+    factContainer.className = 'fact-container';
+
     var fact = new Fact();
     var factText = document.createElement('h4');
     factText.className = 'fact-text';
     factText.innerHTML = fact.text;
 
+    var sourceText = document.createElement('p');
+    sourceText.className = 'source-text';
+    sourceText.innerHTML = fact.source;
+
     finishElements.appendChild(title);
     finishElements.appendChild(textScore);
     finishElements.appendChild(score);
-    finishElements.appendChild(factText);
+    finishElements.appendChild(factContainer);
+    factContainer.appendChild(factText);
+    factContainer.appendChild(sourceText);
     finishElements.appendChild(restartButton);
 
     restartButton.addEventListener('click', function(){
         destroyGameOver();
-        buildSplash();
+        buildGame();
     });
 }
 
