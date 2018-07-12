@@ -115,17 +115,14 @@ function buildGameOver(){
 
     var title = document.createElement('h1');
     title.className = 'game-over-title';
-    title.style.fontSize = '50px';
     title.innerHTML = 'Game over';
 
     var textScore = document.createElement('h3');
-    textScore.style.fontFamily = 'Gaegu';
-    textScore.style.fontSize = '22px';
-    textScore.style.color = 'white';
+    textScore.className = 'score-text';
     textScore.innerHTML = 'Your score is';
 
     var score = document.createElement('h2');
-    score.className = 'score-text';
+    score.className = 'score';
     score.innerHTML = localStorage.getItem('score');
 
     var restartButton = document.createElement('button');
@@ -144,17 +141,26 @@ function buildGameOver(){
     sourceText.className = 'source-text';
     sourceText.innerHTML = fact.source;
 
-    finishElements.appendChild(title);
+    var homeButton = document.createElement('div');
+    homeButton.className = 'button-home';
+
+    //finishElements.appendChild(title);
     finishElements.appendChild(textScore);
     finishElements.appendChild(score);
     finishElements.appendChild(factContainer);
     factContainer.appendChild(factText);
     factContainer.appendChild(sourceText);
     finishElements.appendChild(restartButton);
+    finishElements.appendChild(homeButton);
 
     restartButton.addEventListener('click', function(){
         destroyGameOver();
         buildGame();
+    });
+
+    homeButton.addEventListener('click', function(){
+        destroyGameOver();
+        buildSplash();
     });
 }
 

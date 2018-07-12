@@ -41,19 +41,27 @@ body {
 }
 
 .game-over-title {
-    margin-top: 25%;
-    margin-bottom: 10px;
+    font-size: 50px;
+    margin-top: 30%;
+    margin-bottom: 0px;
 }
 
 .score-text {
+    margin-top: 40%;
+    font-family: 'Gaegu', sans-serif;
+    font-size: 26px;
+    color: white;
+}
+
+.score {
     font-family: 'Open Sans', sans-serif;
     font-weight: 800;
-    font-size: 40px;
+    font-size: 60px;
     color: white;
 }
 
 .fact-container {
-    height: 100px;
+    height: 90px;
     margin: 1em 2em 2em;
     background-color: rgba(255, 255, 255, 0.15);
     border-radius: 25px;
@@ -68,7 +76,8 @@ body {
     font-size: 14px;
     font-weight: 300;
     color: white;
-    padding: 5% 5% 3%;
+    line-height: 20px;
+    padding: 5% 3% 3%;
     position: relative;
     top: 40%;
     transform: translateY(-50%);
@@ -79,6 +88,19 @@ body {
     font-size: 9px;
     font-style: italic;
     color: white;
+    margin-top: 0;
+}
+
+.button-home {
+    margin: 120px auto 0;
+    background-image: url('Media/home-icon2.png');
+    background-size: 40px 35px;
+    width: 40px;
+    height: 35px;
+}
+
+.button-home:hover {
+    cursor: pointer;
 }
 
 .button-start, .button-restart {
