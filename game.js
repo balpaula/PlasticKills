@@ -12,7 +12,8 @@ function Game (options) {
     this.livesImage = new Image();
     this.livesImage.src = 'Media/heart.png';
     this.isEnded = false;
-    this.speedObstacles = 750;
+    this.speedObstacles = 600;
+    this.sound = options.sound;
 }
 
 Game.prototype._drawBackground = function () {
@@ -144,15 +145,18 @@ Game.prototype._collision = function () {
 
 Game.prototype.checkCollision = function (obstacle, index) {
     if (obstacle.type === 'plasticItem'){
+        this.sound.plasticCollision.play();
         this.removeLive();
     } else {
         this.extra.x = obstacle.x;
         this.extra.y = obstacle.y+10;
         setTimeout(this._removeExtra.bind(this), 300);
         if (obstacle.type === 'star') {
+            this.sound.starCollision.play();
             this.score += 10;
             this.extra.text = '+10';
         } else {
+            this.sound.heartCollision.play();
             this.lives++;
             this.extra.text = 'LIVE UP';
         }
@@ -180,7 +184,7 @@ Game.prototype._increaseScore = function () {
 
 Game.prototype._checkLevel = function () {
     this.level = 1 + Math.floor(this.score/100);
-    this.speedObstacles = 750 - 50*(this.level-1);
+    this.speedObstacles = 600 - 100*(this.level-1);
     this.obstacles.forEach(function(obstacle){
         obstacle.speed = ((this.level-1)/10)*5;
     }.bind(this));
@@ -214,6 +218,7 @@ Game.prototype._update = function () {
     } else {
         localStorage.setItem('score',this.score);
         this.fish.stop();
+        this.sound.gameOver.play();
         this._drawMessage();
         setTimeout(this.gameOver, 1000);
     }

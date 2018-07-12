@@ -79,6 +79,7 @@ function buildGame(){
     game = new Game({
         fish: new Fish(),
         background: new Background(ctx),
+        sound: new Sound(),
         ctx: ctx,
         canvas: canvas,
         gameOver: destroyGame,
