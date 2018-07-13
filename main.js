@@ -3,7 +3,6 @@ window.onload = function (){
 }
 
 function buildSplash(){
-    console.log('build splash');
     var startScreen = document.getElementById('start-screen');
     startScreen.style.background = "url('Media/animation-vertical.gif')";
     startScreen.style.backgroundRepeat = 'no-repeat';
@@ -47,7 +46,6 @@ function buildSplash(){
 }
 
 function destroySplash(){
-    console.log('destroy splash');
     var startScreen = document.getElementById('start-screen');
     while (startScreen.firstChild) {
         startScreen.removeChild(startScreen.firstChild);
@@ -58,7 +56,6 @@ function destroySplash(){
 }
 
 function buildGame(){
-    console.log('build game');
     var playScreen = document.getElementById('play-screen');
     playScreen.style.width = '400px';
     playScreen.style.height = '650px';
@@ -67,7 +64,6 @@ function buildGame(){
     canvas.id = 'my-canvas';
     canvas.width = 400;
     canvas.height = 650;
-    console.log(canvas);
 
     playScreen.appendChild(canvas);
 
@@ -90,7 +86,6 @@ function buildGame(){
 }
 
 function destroyGame(){
-    console.log('destroy game');
     var playScreen = document.getElementById('play-screen');
     while (playScreen.firstChild) {
         playScreen.removeChild(playScreen.firstChild);
@@ -101,7 +96,6 @@ function destroyGame(){
 }
 
 function buildGameOver(){
-    console.log('build game over');
     var finishScreen = document.getElementById('finish-screen');
     finishScreen.style.background = "url('Media/Background.png')";
     finishScreen.style.backgroundRepeat = 'no-repeat';
@@ -183,7 +177,6 @@ function buildGameOver(){
 }
 
 function destroyGameOver(){
-    console.log('destroy game over');
     var finishScreen = document.getElementById('finish-screen');
     while (finishScreen.firstChild) {
         finishScreen.removeChild(finishScreen.firstChild);

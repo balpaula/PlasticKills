@@ -135,7 +135,6 @@ Game.prototype._collision = function () {
             if (corner[0]  >=this.fish.x && corner[0] <= this.fish.x+47 && corner[1] >= this.fish.y && corner[1] <= this.fish.y+55){
                 if (obstacle.collision === false){
                     obstacle.collision = true;
-                    console.log(obstacle.type);
                     this.checkCollision(obstacle, index);
                 } 
             }
