@@ -48,7 +48,7 @@ Game.prototype._drawScore = function () {
     this.ctx.fillStyle ='white';
     this.ctx.font ='31px Gaegu';
     var textScore = ('0000'+this.score).slice(-5);
-    this.ctx.fillText(textScore,300,32);
+    this.ctx.fillText(textScore,220,32);
 }
 
 Game.prototype._drawExtra = function (x, y) {
@@ -64,14 +64,14 @@ Game.prototype._drawLives = function () {
         this.lives = 3;
     }
     for (var i = 0; i < this.lives; i++){
-        this.ctx.drawImage(this.livesImage, 300+30*i, 42, 25, 21);
+        this.ctx.drawImage(this.livesImage, 220+30*i, 42, 25, 21);
     }
 }
 
 Game.prototype._drawMessage = function () {
     this.ctx.fillStyle = 'white';
     this.ctx.font = '50px Gaegu';
-    this.ctx.fillText('GAME OVER',78,330);
+    this.ctx.fillText('GAME OVER',40,300);
 }
 
 Game.prototype.start = function () {
@@ -86,7 +86,7 @@ Game.prototype.onCanvasClick = function (e) {
     var x = e.clientX - this.ctx.canvas.offsetLeft;
     var y = e.clientY - this.ctx.canvas.offsetTop;
 
-    if (x < 200){
+    if (x < 160){
         this.fish.goLeft();
     } else {
         this.fish.goRight();
@@ -224,6 +224,4 @@ Game.prototype._update = function () {
     
 }
 
-//localStorage.getItem
-//localStorage.setItem
 

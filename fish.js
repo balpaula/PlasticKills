@@ -1,6 +1,6 @@
 function Fish () {
-    this.x = 200;
-    this.y = 200;
+    this.x = 160;
+    this.y = 190;
     this.direction = undefined;
     this.intervalId = undefined;
     this.image = new Image();
@@ -30,7 +30,7 @@ Fish.prototype._moveForward = function () {
 Fish.prototype.goLeft = function () {
     this.direction = 'left';
     this.image.src = 'Media/Fish-Left.png';
-    if (this.x > 20){
+    if (this.x > 10){
         this.x-=5;
     } else {
         this.goRight();
@@ -40,7 +40,7 @@ Fish.prototype.goLeft = function () {
 Fish.prototype.goRight = function () {
     this.direction = 'right';
     this.image.src = 'Media/Fish-Right.png';
-    if (this.x < 380){
+    if (this.x < 310){
         this.x+=5;
     } else {
         this.goLeft();

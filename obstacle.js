@@ -1,5 +1,5 @@
 function Obstacle(){
-    this.x = Math.floor(Math.random()*361)+20;
+    this.x = Math.floor(Math.random()*321);
     this.y = 630;
     this.intervalId = undefined;
     this.collision = false;
@@ -31,22 +31,6 @@ Obstacle.prototype.move = function () {
 Obstacle.prototype.stop = function () {
     this.y = 0;
 }
-
-// Obstacle.prototype.createType = function () {
-//     var num = Math.floor(Math.random()*5);
-//     if (num === 4){
-//         return ['star', 'yellow', '../Media/groga.png'];
-//     } else {
-//         return ['enemy', 'red', this.randomPlasticItem()];
-//     }
-// }
-
-// Obstacle.prototype.randomPlasticItem = function () {
-//     var imagesArray = ['../Media/bottle.png','../Media/bag.png', '../Media/spoon.png'];
-//     return imagesArray[Math.floor(Math.random()*imagesArray.length)];
-// }
-
-// Refactor
 
 function PlasticItem () {
     Obstacle.call(this);

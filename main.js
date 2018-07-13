@@ -4,11 +4,9 @@ window.onload = function (){
 
 function buildSplash(){
     var startScreen = document.getElementById('start-screen');
-    startScreen.style.background = "url('Media/animation-vertical.gif')";
-    startScreen.style.backgroundRepeat = 'no-repeat';
-    startScreen.style.backgroundSize = '400px 650px';
-    startScreen.style.width = '400px';
-    startScreen.style.height = '650px';
+    startScreen.id = 'start-screen';
+    startScreen.style.width = '320px';
+    startScreen.style.height = '568px';
 
     var title = document.createElement('h1');
     title.className = 'main-title';
@@ -50,20 +48,20 @@ function destroySplash(){
     while (startScreen.firstChild) {
         startScreen.removeChild(startScreen.firstChild);
     }
-    startScreen.style.background = 'none';
+    
     startScreen.style.width = '0px';
     startScreen.style.height = '0px';
 }
 
 function buildGame(){
     var playScreen = document.getElementById('play-screen');
-    playScreen.style.width = '400px';
-    playScreen.style.height = '650px';
+    playScreen.style.width = '320px';
+    playScreen.style.height = '568px';
 
     var canvas = document.createElement('canvas');
     canvas.id = 'my-canvas';
-    canvas.width = 400;
-    canvas.height = 650;
+    canvas.width = 320;
+    canvas.height = 568;
 
     playScreen.appendChild(canvas);
 
@@ -99,13 +97,13 @@ function buildGameOver(){
     var finishScreen = document.getElementById('finish-screen');
     finishScreen.style.background = "url('Media/Background.png')";
     finishScreen.style.backgroundRepeat = 'no-repeat';
-    finishScreen.style.width = '400px';
-    finishScreen.style.height = '650px';
+    finishScreen.style.width = '320px';
+    finishScreen.style.height = '568px';
 
     var canvas = document.createElement('canvas');
     canvas.id = 'canvas-game-over';
-    canvas.width = 400;
-    canvas.height = 650;
+    canvas.width = 320;
+    canvas.height = 568;
 
     finishScreen.appendChild(canvas);
     var ctx = canvas.getContext('2d');
